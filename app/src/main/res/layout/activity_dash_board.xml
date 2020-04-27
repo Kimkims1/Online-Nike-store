@@ -34,13 +34,13 @@
 
         <!-- Add product button-->
         <ImageButton
-            android:id="@+id/addProductBtn"
+            android:id="@+id/checkBalBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="0dp"
             android:layout_toStartOf="@id/editProfileBtn"
             android:background="@null"
-            android:src="@drawable/ic_add_shopping_white" />
+            android:src="@drawable/ic_money" />
 
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
@@ -117,7 +117,7 @@
         android:layout_below="@id/overallRl">
 
         <EditText
-            android:id="@+id/searchProductEt"
+            android:id="@+id/searchJobEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -143,7 +143,7 @@
             android:id="@+id/filteredProductsTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/searchProductEt"
+            android:layout_below="@id/searchJobEt"
             android:layout_marginStart="5dp"
             android:layout_marginBottom="5dp"
             android:text="Showing All"
@@ -151,7 +151,7 @@
 
         <!-- Recyclerview show products-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productsRv"
+            android:id="@+id/AllJobsRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/filteredProductsTv"
