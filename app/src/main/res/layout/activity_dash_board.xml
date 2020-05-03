@@ -31,14 +31,12 @@
             android:background="@null"
             android:src="@drawable/ic_edit_white" />
 
-
-        <!-- Add product button-->
         <ImageButton
             android:id="@+id/checkBalBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="0dp"
-            android:layout_toStartOf="@id/editProfileBtn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:background="@null"
             android:src="@drawable/ic_money" />
 
@@ -58,24 +56,33 @@
             android:layout_toEndOf="@id/profileIv"
             android:text="Name"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/proffesionTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nameTv"
-            android:layout_toEndOf="@id/profileIv"
-            android:text="Web developer"
-            android:textColor="@color/colorWhite" />
+            />
 
         <TextView
             android:id="@+id/emailTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/proffesionTv"
+            android:layout_below="@id/nameTv"
             android:layout_toEndOf="@id/profileIv"
             android:text="Email"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/phoneTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailTv"
+            android:layout_toEndOf="@id/profileIv"
+            android:text="Phone"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/professionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phoneTv"
+            android:layout_toEndOf="@id/profileIv"
+            android:text="Profession"
             android:textColor="@color/colorWhite" />
 
         <LinearLayout
@@ -87,16 +94,16 @@
             android:orientation="horizontal"
             android:padding="5dp">
 
-            <!-- Products -->
+            <!-- Shops -->
             <TextView
-                android:id="@+id/tabAllJobsTv"
+                android:id="@+id/tabsJobsTv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/shape_rect04"
                 android:gravity="center"
-                android:text="All Jobs"
-                android:textColor="@color/colorBlack" />
+                android:text="Jobs"
+                android:textColor="@color/colorblack" />
 
             <!-- Orders -->
             <TextView
@@ -105,61 +112,41 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Applied Orders"
+                android:text="Oders"
                 android:textColor="@color/colorWhite" />
         </LinearLayout>
 
     </RelativeLayout>
 
+    <!-- Shops UI-->
     <RelativeLayout
+        android:id="@+id/shopRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/overallRl">
+        android:layout_below="@+id/overallRl">
 
-        <EditText
-            android:id="@+id/searchJobEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="0dp"
-            android:layout_toStartOf="@id/filterBtn"
-            android:background="@drawable/shape_rect02"
-            android:drawableStart="@drawable/ic_search_gray"
-            android:hint="Search Job"
-            android:padding="10dp" />
-
-        <ImageButton
-            android:id="@+id/filterBtn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_filter_gray" />
-
-        <TextView
-            android:id="@+id/filteredProductsTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/searchJobEt"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Showing All"
-            android:textColor="@color/colorBlack" />
-
-        <!-- Recyclerview show products-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/AllJobsRv"
+            android:id="@+id/shopRv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/filteredProductsTv"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            tools:listitem="@layout/row_jobs">
 
+        </androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 
+    <!-- Shops UI-->
+    <RelativeLayout
+        android:id="@+id/ordersRl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/overallRl">
+
+    </RelativeLayout>
 
 </RelativeLayout>
