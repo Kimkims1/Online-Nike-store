@@ -31,14 +31,15 @@
             android:background="@null"
             android:src="@drawable/ic_edit_white" />
 
-        <ImageButton
-            android:id="@+id/checkBalBtn"
+        <TextView
+            android:id="@+id/balanceTv"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:background="@null"
-            android:src="@drawable/ic_money" />
+            android:text="50"
+            android:layout_toStartOf="@id/editProfileBtn"
+            android:textColor="@color/colorWhite" />
 
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
@@ -55,8 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/profileIv"
             android:text="Name"
-            android:textColor="@color/colorWhite"
-            />
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:id="@+id/emailTv"
@@ -126,7 +126,7 @@
         android:layout_below="@+id/overallRl">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/shopRv"
+            android:id="@+id/AllJobsRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

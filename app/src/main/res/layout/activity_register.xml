@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/welcome_to_cool_jobs_app"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorblack"
         android:textSize="25sp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -68,7 +68,7 @@
         android:layout_below="@id/registerBtn"
         android:layout_marginTop="30sp"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorblack"/>
 
 
 </RelativeLayout>

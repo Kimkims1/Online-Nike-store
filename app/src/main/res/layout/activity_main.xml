@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/login"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorblack"
         android:textSize="25sp" />
 
     <!---EditText: Input E-mail -->
@@ -70,7 +70,7 @@
         android:layout_marginTop="30sp"
         android:text="@string/forgot_password_recover_now"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorblack" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleBtn"
@@ -89,7 +89,7 @@
         android:layout_marginBottom="20sp"
         android:text="@string/no_account_register"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorblack" />
 
 
 </RelativeLayout>
