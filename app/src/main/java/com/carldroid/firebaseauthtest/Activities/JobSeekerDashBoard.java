@@ -1,4 +1,4 @@
-package com.carldroid.firebaseauthtest;
+package com.carldroid.firebaseauthtest.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,19 +14,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carldroid.firebaseauthtest.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class DashBoardActivity extends AppCompatActivity {
+public class JobSeekerDashBoard extends AppCompatActivity {
 
     private TextView nameTv, balanceTv, professionTv, phoneTv, emailTv, tabsJobsTv, tabAppliedJobsTv;
     private RecyclerView AllJobsRv;
@@ -81,7 +80,7 @@ public class DashBoardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open edit profile activity
-                startActivity(new Intent(DashBoardActivity.this, EditProfileActivity.class));
+                startActivity(new Intent(JobSeekerDashBoard.this, EditProfileActivity.class));
                 finish();
             }
         });
@@ -91,7 +90,7 @@ public class DashBoardActivity extends AppCompatActivity {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
-            startActivity(new Intent(DashBoardActivity.this, LoginActivity.class));
+            startActivity(new Intent(JobSeekerDashBoard.this, LoginActivity.class));
 
         } else {
             loadMyInfo();
@@ -124,7 +123,7 @@ public class DashBoardActivity extends AppCompatActivity {
                             }
                         } else {
                             // Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast.makeText(DashBoardActivity.this, "Error getting documents " + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JobSeekerDashBoard.this, "Error getting documents " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -132,7 +131,7 @@ public class DashBoardActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(DashBoardActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobSeekerDashBoard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.carldroid.firebaseauthtest;
+package com.carldroid.firebaseauthtest.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.carldroid.firebaseauthtest.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -103,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         noAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegJobSeeker.class));
                 finish();
             }
         });
@@ -137,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         noAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegJobSeeker.class));
                 finish();
             }
         });
@@ -156,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             progressDialog.dismiss();
-                            startActivity(new Intent(LoginActivity.this,DashBoardActivity.class));
+                            startActivity(new Intent(LoginActivity.this, JobSeekerDashBoard.class));
                             finish();
                         }
                     }
@@ -282,7 +283,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(LoginActivity.this, "" + user.getEmail(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, DashBoardActivity.class));
+                            startActivity(new Intent(LoginActivity.this, JobSeekerDashBoard.class));
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login Failed.....", Toast.LENGTH_SHORT).show();

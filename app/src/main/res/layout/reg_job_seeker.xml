@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20sp"
-    tools:context=".RegisterActivity">
+    tools:context=".Activities.RegJobSeeker">
 
     <!---Textview: Label REGISTER -->
     <TextView
@@ -66,6 +66,16 @@
         android:layout_height="wrap_content"
         android:text="Already have an account? Login"
         android:layout_below="@id/registerBtn"
+        android:layout_marginTop="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorblack"/>
+
+    <TextView
+        android:id="@+id/regJobProvider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register as Job Provider"
+        android:layout_below="@id/have_accountTv"
         android:layout_marginTop="30sp"
         android:textAlignment="center"
         android:textColor="@color/colorblack"/>

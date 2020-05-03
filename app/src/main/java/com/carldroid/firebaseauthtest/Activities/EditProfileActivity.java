@@ -1,8 +1,10 @@
-package com.carldroid.firebaseauthtest;
+package com.carldroid.firebaseauthtest.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.carldroid.firebaseauthtest.R;
 
 public class EditProfileActivity extends AppCompatActivity {
 

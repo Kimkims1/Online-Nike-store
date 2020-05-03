@@ -1,4 +1,4 @@
-package com.carldroid.firebaseauthtest;
+package com.carldroid.firebaseauthtest.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.carldroid.firebaseauthtest.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,11 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegJobSeeker extends AppCompatActivity {
 
     private EditText emailEt, passwordEt;
     private Button registerBtn;
-    private TextView have_accountTv;
+    private TextView have_accountTv,regJobProvider;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -41,12 +42,13 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.reg_job_seeker);
 
         emailEt = findViewById(R.id.emailEt);
         passwordEt = findViewById(R.id.passwordEt);
         registerBtn = findViewById(R.id.registerBtn);
         have_accountTv = findViewById(R.id.have_accountTv);
+        regJobProvider = findViewById(R.id.regJobProvider);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -63,7 +65,15 @@ public class RegisterActivity extends AppCompatActivity {
         have_accountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                startActivity(new Intent(RegJobSeeker.this, LoginActivity.class));
+                finish();
+            }
+        });
+
+        regJobProvider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegJobSeeker.this, RegJobProvider.class));
                 finish();
             }
         });
@@ -114,16 +124,16 @@ public class RegisterActivity extends AppCompatActivity {
                             collectionReference.add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    startActivity(new Intent(RegisterActivity.this,DashBoardActivity.class));
+                                    startActivity(new Intent(RegJobSeeker.this, JobSeekerDashBoard.class));
                                     finish();
 
-                                    Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegJobSeeker.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                                 }
                             })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(RegisterActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(RegJobSeeker.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     });
                         }
@@ -133,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegisterActivity.this, "Authentication failed" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegJobSeeker.this, "Authentication failed" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
