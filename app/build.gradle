@@ -53,4 +53,7 @@ dependencies {
     //Needed for GoogleSignIn
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
+    //FireStore Ui
+    implementation 'com.firebaseui:firebase-ui-firestore:6.0.2'
+
 }

@@ -29,7 +29,7 @@
             android:src="@drawable/shape_circle00" />
 
         <TextView
-            android:id="@+id/shopClosedTv"
+            android:id="@+id/budgetTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/nextIv"
@@ -46,12 +46,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/jobNameTv"
+                android:id="@+id/jobTypeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:maxLines="1"
-                android:text="Job Name"
+                android:text="Job Type"
                 android:textColor="@color/colorblack"
                 android:textStyle="bold" />
 

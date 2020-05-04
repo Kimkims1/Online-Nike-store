@@ -15,33 +15,47 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carldroid.firebaseauthtest.R;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class JobSeekerDashBoard extends AppCompatActivity {
+import java.util.ArrayList;
+
+import Adapters.AdapterFindJob;
+import Models.ModelFindJob;
+
+public class FindJobDashBoard extends AppCompatActivity {
 
     private TextView nameTv, balanceTv, professionTv, phoneTv, emailTv, tabsJobsTv, tabAppliedJobsTv;
-    private RecyclerView AllJobsRv;
+    private RecyclerView allJobsRv;
 
     private ImageButton logoutBtn, editProfileBtn;
     private ImageView profileIv;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
-    private CollectionReference collectionReference;
+
     private ProgressDialog progressDialog;
+
+    private ArrayList<ModelFindJob> findJobArrayList;
+    private AdapterFindJob adapterFindJob;
+
+    private CollectionReference collectionReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dash_board);
+        setContentView(R.layout.findjob_dashboard);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -53,7 +67,7 @@ public class JobSeekerDashBoard extends AppCompatActivity {
         emailTv = findViewById(R.id.emailTv);
         tabsJobsTv = findViewById(R.id.tabsJobsTv);
         tabAppliedJobsTv = findViewById(R.id.tabAppliedJobsTv);
-        AllJobsRv = findViewById(R.id.AllJobsRv);
+        allJobsRv = findViewById(R.id.allJobsRv);
         balanceTv = findViewById(R.id.balanceTv);
         logoutBtn = findViewById(R.id.logoutBtn);
         editProfileBtn = findViewById(R.id.editProfileBtn);
@@ -66,6 +80,8 @@ public class JobSeekerDashBoard extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         checkUser();
+
+        loadPostedJobs();
 
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +96,7 @@ public class JobSeekerDashBoard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open edit profile activity
-                startActivity(new Intent(JobSeekerDashBoard.this, EditProfileActivity.class));
+                startActivity(new Intent(FindJobDashBoard.this, EditProfileActivity.class));
                 finish();
             }
         });
@@ -90,7 +106,7 @@ public class JobSeekerDashBoard extends AppCompatActivity {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
-            startActivity(new Intent(JobSeekerDashBoard.this, LoginActivity.class));
+            startActivity(new Intent(FindJobDashBoard.this, LoginActivity.class));
 
         } else {
             loadMyInfo();
@@ -100,7 +116,7 @@ public class JobSeekerDashBoard extends AppCompatActivity {
 
     private void loadMyInfo() {
 
-        firebaseFirestore.collection("users")
+        firebaseFirestore.collection("Find_Job_Users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -123,7 +139,7 @@ public class JobSeekerDashBoard extends AppCompatActivity {
                             }
                         } else {
                             // Log.d(TAG, "Error getting documents: ", task.getException());
-                            Toast.makeText(JobSeekerDashBoard.this, "Error getting documents " + task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FindJobDashBoard.this, "Error getting documents " + task.getException(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -131,8 +147,57 @@ public class JobSeekerDashBoard extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(JobSeekerDashBoard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FindJobDashBoard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void loadPostedJobs() {
+
+        firebaseFirestore.collection("Post_Job_Users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+
+                            Query query = collectionReference.orderBy("date", Query.Direction.ASCENDING);
+
+                            FirestoreRecyclerOptions<ModelFindJob> options = new FirestoreRecyclerOptions.Builder<ModelFindJob>()
+                                    .setQuery(query, ModelFindJob.class)
+                                    .build();
+
+                            adapterFindJob = new AdapterFindJob(options);
+
+                            allJobsRv.setAdapter(adapterFindJob);
+                        } else {
+
+                            Toast.makeText(FindJobDashBoard.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(FindJobDashBoard.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        adapterFindJob.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        adapterFindJob.stopListening();
     }
 }

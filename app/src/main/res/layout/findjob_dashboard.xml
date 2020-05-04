@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.JobSeekerDashBoard">
+    tools:context=".Activities.FindJobDashBoard">
 
     <RelativeLayout
         android:id="@+id/overallRl"
@@ -126,7 +126,7 @@
         android:layout_below="@+id/overallRl">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/AllJobsRv"
+            android:id="@+id/allJobsRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

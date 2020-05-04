@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             progressDialog.dismiss();
-                            startActivity(new Intent(LoginActivity.this, JobSeekerDashBoard.class));
+                            startActivity(new Intent(LoginActivity.this, FindJobDashBoard.class));
                             finish();
                         }
                     }
@@ -283,7 +283,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             Toast.makeText(LoginActivity.this, "" + user.getEmail(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, JobSeekerDashBoard.class));
+                            startActivity(new Intent(LoginActivity.this, FindJobDashBoard.class));
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Login Failed.....", Toast.LENGTH_SHORT).show();

@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.PostJobUser"></activity>
+        <activity android:name=".Activities.PostJobDashboard"></activity>
+        <activity android:name=".Activities.PostJobUser" />
         <activity android:name=".Activities.EditProfileActivity" />
         <activity android:name=".Activities.FindJobUser" />
-        <activity android:name=".Activities.JobSeekerDashBoard" />
+        <activity android:name=".Activities.FindJobDashBoard" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

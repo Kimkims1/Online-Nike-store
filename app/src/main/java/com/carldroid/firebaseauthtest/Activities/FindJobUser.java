@@ -59,9 +59,11 @@ public class FindJobUser extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        collectionReference = firebaseFirestore.collection("users");
+        collectionReference = firebaseFirestore.collection("Find_Job_Users");
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading..Please wait");
+        progressDialog.setCanceledOnTouchOutside(true);
 
 
         have_accountTv.setOnClickListener(new View.OnClickListener() {
@@ -120,15 +122,18 @@ public class FindJobUser extends AppCompatActivity {
                             String email = firebaseUser.getEmail();
                             String uid = firebaseUser.getUid();
                             String name = nameEt.getText().toString().trim();
+                            String profession = professionEt.getText().toString().trim();
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("email", email);
                             hashMap.put("uid", uid);
+                            hashMap.put("name",name);
+                            hashMap.put("profession",profession);
 
                             collectionReference.add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    startActivity(new Intent(FindJobUser.this, JobSeekerDashBoard.class));
+                                    startActivity(new Intent(FindJobUser.this, FindJobDashBoard.class));
                                     finish();
 
                                     Toast.makeText(FindJobUser.this, "Registered Successfully", Toast.LENGTH_LONG).show();
