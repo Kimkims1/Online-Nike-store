@@ -28,11 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class RegJobSeeker extends AppCompatActivity {
+public class FindJobUser extends AppCompatActivity {
 
-    private EditText emailEt, passwordEt;
+    private EditText emailEt, passwordEt,nameEt,professionEt;
     private Button registerBtn;
-    private TextView have_accountTv,regJobProvider;
+    private TextView have_accountTv,postJobTv;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -42,13 +42,15 @@ public class RegJobSeeker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reg_job_seeker);
+        setContentView(R.layout.find_job_user);
 
         emailEt = findViewById(R.id.emailEt);
+        professionEt = findViewById(R.id.professionEt);
         passwordEt = findViewById(R.id.passwordEt);
         registerBtn = findViewById(R.id.registerBtn);
         have_accountTv = findViewById(R.id.have_accountTv);
-        regJobProvider = findViewById(R.id.regJobProvider);
+        postJobTv = findViewById(R.id.postJobTv);
+        nameEt = findViewById(R.id.nameEt);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -65,15 +67,15 @@ public class RegJobSeeker extends AppCompatActivity {
         have_accountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegJobSeeker.this, LoginActivity.class));
+                startActivity(new Intent(FindJobUser.this, LoginActivity.class));
                 finish();
             }
         });
 
-        regJobProvider.setOnClickListener(new View.OnClickListener() {
+        postJobTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegJobSeeker.this, RegJobProvider.class));
+                startActivity(new Intent(FindJobUser.this, PostJobUser.class));
                 finish();
             }
         });
@@ -82,6 +84,7 @@ public class RegJobSeeker extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 String email = emailEt.getText().toString().trim();
                 String password = passwordEt.getText().toString().trim();
 
@@ -89,7 +92,7 @@ public class RegJobSeeker extends AppCompatActivity {
                     emailEt.setError("Invalid email!");
                     emailEt.setFocusable(true);
                 } else if (passwordEt.length() < 8) {
-                    passwordEt.setError("Password length should be atleast 8 characters or more");
+                    passwordEt.setError("Password length should be at least 8 characters or more");
                     passwordEt.setFocusable(true);
                 } else {
                     registerUser(email, password);
@@ -116,6 +119,7 @@ public class RegJobSeeker extends AppCompatActivity {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                             String email = firebaseUser.getEmail();
                             String uid = firebaseUser.getUid();
+                            String name = nameEt.getText().toString().trim();
 
                             HashMap<Object, String> hashMap = new HashMap<>();
                             hashMap.put("email", email);
@@ -124,16 +128,16 @@ public class RegJobSeeker extends AppCompatActivity {
                             collectionReference.add(hashMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    startActivity(new Intent(RegJobSeeker.this, JobSeekerDashBoard.class));
+                                    startActivity(new Intent(FindJobUser.this, JobSeekerDashBoard.class));
                                     finish();
 
-                                    Toast.makeText(RegJobSeeker.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(FindJobUser.this, "Registered Successfully", Toast.LENGTH_LONG).show();
                                 }
                             })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(RegJobSeeker.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(FindJobUser.this, e.getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     });
                         }
@@ -143,7 +147,7 @@ public class RegJobSeeker extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(RegJobSeeker.this, "Authentication failed" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(FindJobUser.this, "Authentication failed" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 

@@ -5,6 +5,7 @@
     <string name="password">Password</string>
     <string name="forgot_password_recover_now">Forgot Password? Recover Now</string>
     <string name="no_account_register">No account? Register</string>
-    <string name="welcome_to_cool_jobs_app">Welcome, Register Now</string>
+    <string name="welcome_to_cool_jobs_app">Looking for a Job? Register Now</string>
+    <string name="post_job">Looking for a client? Register Now</string>
     <!-- <string name="default_web_client_id">316486405698-ta7ljre1e9g5nfi6vmif4ot5g87g224k.apps.googleusercontent.com</string>-->
 </resources>

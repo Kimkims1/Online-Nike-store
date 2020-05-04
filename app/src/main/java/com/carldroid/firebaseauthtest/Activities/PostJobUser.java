@@ -9,22 +9,22 @@ import android.widget.TextView;
 
 import com.carldroid.firebaseauthtest.R;
 
-public class RegJobProvider extends AppCompatActivity {
+public class PostJobUser extends AppCompatActivity {
 
-    private TextView regJobSeeker;
+    private TextView findJobTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reg_job_provider);
+        setContentView(R.layout.post_job_user);
 
 
-        regJobSeeker = findViewById(R.id.regJobSeeker);
+        findJobTv = findViewById(R.id.findJobTv);
 
-        regJobSeeker.setOnClickListener(new View.OnClickListener() {
+        findJobTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegJobProvider.this, RegJobSeeker.class));
+                startActivity(new Intent(PostJobUser.this, FindJobUser.class));
                 finish();
             }
         });
