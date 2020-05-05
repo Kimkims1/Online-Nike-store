@@ -11,45 +11,47 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.carldroid.firebaseauthtest.R;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import Models.ModelFindJob;
 
-public class AdapterFindJob extends FirestoreRecyclerAdapter<ModelFindJob,AdapterFindJob.FindJobHolder> {
+public class AdapterFindJob extends RecyclerView.Adapter<AdapterFindJob.FindJobHolder> {
 
     private Context context;
-    public ArrayList<ModelFindJob> findJobs;
+    private List<ModelFindJob> modelFindJobList;
+    private FirebaseFirestore firestoreDB;
 
-    /**
-     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
-     * FirestoreRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public AdapterFindJob(@NonNull FirestoreRecyclerOptions<ModelFindJob> options) {
-        super(options);
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull FindJobHolder holder, int position, @NonNull ModelFindJob model) {
-        holder.phoneTv.setText(model.getPhone());
-        holder.addressTv.setText(model.getAddress());
-        holder.budgetTv.setText(model.getBudget());
-        holder.jobTypeTv.setText(model.getJobType());
+    public AdapterFindJob(Context context, List<ModelFindJob> modelFindJobList, FirebaseFirestore firestoreDB) {
+        this.context = context;
+        this.modelFindJobList = modelFindJobList;
+        this.firestoreDB = firestoreDB;
     }
 
     @NonNull
     @Override
     public FindJobHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_jobs,
-                parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.row_jobs, parent, false);
+
         return new FindJobHolder(view);
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull FindJobHolder holder, int position) {
+
+           final ModelFindJob modelFindJob = modelFindJobList.get(position);
+           holder.jobTypeTv.setText(modelFindJob.getJobType());
+           holder.budgetTv.setText(modelFindJob.getBudget());
+           holder.addressTv.setText(modelFindJob.getAddress());
+           holder.phoneTv.setText(modelFindJob.getPhone());
+    }
+
+    @Override
+    public int getItemCount() {
+        return modelFindJobList.size();
+    }
 
     public class FindJobHolder extends RecyclerView.ViewHolder {
 
